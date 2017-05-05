@@ -1,5 +1,11 @@
 # Base Classes for oop on NodeJS
 
+## Instalation
+
+```bash
+npm i node-abstract-oop
+```
+
 ## Event Controller
 
 Class for simple work with [EventEmmiter](https://nodejs.org/dist/latest-v7.x/docs/api/events.html#events_class_eventemitter)
