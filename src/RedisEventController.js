@@ -17,7 +17,9 @@ class RedisEventController {
             this.redis.subscribe(eventName);
         });
         this.redis.on('message', (channel, message) => {
-            this[this.eventNames[channel]](JSON.parse(message));
+            if(this[this.eventNames[channel]]) {
+                this[this.eventNames[channel]](JSON.parse(message));
+            }
         });
     }
 
