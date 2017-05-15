@@ -13,6 +13,7 @@ Class for simple work with [EventEmmiter](https://nodejs.org/dist/latest-v7.x/do
 ### Example
 
 ```javascript
+const EventEmitter = require('events');
 const EventController = require('node-abstract-oop').EventController;
 
 class Test extends EventController {
@@ -32,6 +33,16 @@ class Test extends EventController {
     }
 
 }
+
+// Init controller
+
+const myEE = new EventEmitter();
+
+let testEventController = new Test(myEE);
+testEventController.initListeners();
+
+// fire event
+myEE.emit('test.event', {arg: 'Event arg'});
 ```
 
 ## Redis Event Controller
@@ -42,6 +53,8 @@ Class for simple work with [Redis](https://github.com/NodeRedis/node_redis)
 
 ```javascript
 const RedisEventController = require('node-abstract-oop').RedisEventController;
+const redis = require("redis");
+let client = redis.createClient();
 
 class Test extends RedisEventController {
 
@@ -60,4 +73,11 @@ class Test extends RedisEventController {
     }
 
 }
+
+// Init controller
+let testEventController = new Test(client);
+testEventController.initListeners();
+
+// fire event
+client.rpush('test.event', JSON.stringify({arg: 'Event arg'}));
 ```
